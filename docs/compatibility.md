@@ -17,6 +17,8 @@ This package is expected to work in these environments:
 | meteor@2                              |                                                                               |
 | jest@27.5.1                           | requires an environment where Buffer is instanceof Uint8Array [jest]          |
 | typescript                            | requires `tsconfig.json` adjustments [typescript]                             |
+| Angular >=14 (TS)                     | requires `tsconfig.json` adjustments [typescript]                             |
+| Angular (JS)                          | requires importing from '@aeternity/aepp-sdk/dist/aepp-sdk.browser.js'        |
 | vite@3                                | requires `build.target: 'es2020'` and `bigint: true` in vite.config.js [vite] |
 
 [webpack-4]: https://github.com/webpack/webpack/issues/7482#issuecomment-394884837
