@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { compilerUrl, ignoreVersion } from '.';
+import { compilerUrl } from '.';
 import inclAci from './contracts/Includes.json';
 import {
   CompilerBase, CompilerHttpNode, CompilerCli, CompilerError, getFileSystem, Encoded,
@@ -124,7 +124,7 @@ function testCompiler(compiler: CompilerBase): void {
 }
 
 describe('CompilerHttp', () => {
-  const compiler = new CompilerHttpNode(compilerUrl, { ignoreVersion });
+  const compiler = new CompilerHttpNode(compilerUrl);
   testCompiler(compiler);
 
   it('throws exception if used invalid compiler url', async () => {
