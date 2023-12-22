@@ -60,8 +60,8 @@ export interface ChannelOptions {
   responderId: Encoded.AccountAddress;
   lockPeriod: number;
   pushAmount: number;
-  initiatorAmount: BigNumber;
-  responderAmount: BigNumber;
+  initiatorAmount: BigNumber | number;
+  responderAmount: BigNumber | number;
   channelReserve?: BigNumber | number;
   ttl?: number;
   host: string;

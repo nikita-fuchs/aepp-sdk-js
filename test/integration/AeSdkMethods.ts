@@ -89,7 +89,7 @@ describe('AeSdkMethods', () => {
             { name: 'logPolicy' },
           ],
         },
-        $host: 'http://localhost:3013',
+        $host: url,
         intAsString: true,
       },
       onCompiler: {
@@ -130,7 +130,7 @@ describe('AeSdkMethods', () => {
               { name: 'logPolicy' },
             ],
           },
-          $host: 'http://localhost:3080',
+          $host: compilerUrl,
         },
       },
     });
