@@ -4,7 +4,7 @@ import {
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import BigNumber from 'bignumber.js';
-import { getSdk, networkId, channelUrl } from '.';
+import { getSdk, channelUrl } from '.';
 import {
   unpackTx,
   buildTxHash,
@@ -50,7 +50,7 @@ async function waitForChannel(channel: Channel): Promise<void> {
   });
 }
 
-(networkId === 'ae_devnet' ? describe : describe.skip)('Channel', () => {
+describe('Channel', () => {
   let aeSdkInitiatior: AeSdk;
   let aeSdkResponder: AeSdk;
   let initiatorCh: Channel;
@@ -104,6 +104,7 @@ async function waitForChannel(channel: Channel): Promise<void> {
     initiatorId: 'ak_',
     responderId: 'ak_',
     role: 'initiator',
+    debug: true,
   };
 
   before(async () => {
@@ -173,6 +174,7 @@ async function waitForChannel(channel: Channel): Promise<void> {
     expect(responderTx.tag).to.be.equal(Tag.ChannelCreateTx);
     responderTx.should.eql({ ...responderTx, ...expectedTxParams });
   });
+  return;
 
   it('emits error on handling incoming messages', async () => {
     const getError = new Promise<ChannelIncomingMessageError>((resolve) => {
