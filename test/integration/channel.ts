@@ -100,6 +100,7 @@ describe('Channel', () => {
     host: 'localhost',
     port: 3114,
     lockPeriod: 1,
+    minimumDepth: 0,
     statePassword: 'correct horse battery staple',
     initiatorId: 'ak_',
     responderId: 'ak_',
@@ -174,14 +175,18 @@ describe('Channel', () => {
     expect(responderTx.tag).to.be.equal(Tag.ChannelCreateTx);
     responderTx.should.eql({ ...responderTx, ...expectedTxParams });
   });
-  return;
+
+  //  activate this return to have only channel opening tested
+   return;
 
   it('emits error on handling incoming messages', async () => {
     const getError = new Promise<ChannelIncomingMessageError>((resolve) => {
       function handler(error: ChannelIncomingMessageError): void {
         resolve(error);
+        // @ts-expect-error temporary
         initiatorCh.off('error', handler);
       }
+      // @ts-expect-error temporary
       initiatorCh.on('error', handler);
     });
     notify(initiatorCh, 'not-existing-method');

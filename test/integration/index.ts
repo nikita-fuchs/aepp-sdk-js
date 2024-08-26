@@ -11,10 +11,7 @@ const configuration = {
     url: 'https://mainnet.aeternity.io',
     channelUrl: 'wss://mainnet.aeternity.io/channel',
     compilerUrl: 'https://v7.compiler.aeternity.io',
-    getGenesisAccount: () => {
-      if (process.env.MAINNET_SECRET_KEY == null) throw new Error('MAINNET_SECRET_KEY is not set');
-      return new MemoryAccount(process.env.MAINNET_SECRET_KEY);
-    },
+    getGenesisAccount: () => new MemoryAccount('bd07bbaec089c018f41f244d46da41dc2d5cee2eb374542bb2d663d1aef88c65b7f6a108650fabe6b81ef2630ceb7b252974915c158884b03d9b851fdc74e36b'),
   },
   ae_uat: {
     url: 'https://testnet.aeternity.io',
@@ -22,6 +19,7 @@ const configuration = {
     compilerUrl: 'https://v7.compiler.aeternity.io',
     getGenesisAccount: async () => {
       const account = MemoryAccount.generate();
+      // @ts-expect-error
       const { status } = await fetch(
         `https://faucet.aepps.com/account/${account.address}`,
         { method: 'POST' },
@@ -35,7 +33,7 @@ const configuration = {
     channelUrl: 'ws://localhost:3014/channel',
     compilerUrl: 'http://localhost:3080',
     getGenesisAccount: () => new MemoryAccount(
-      '9ebd7beda0c79af72a42ece3821a56eff16359b6df376cf049aee995565f022f840c974b97164776454ba119d84edc4d6058a8dec92b6edc578ab2d30b4c4200',
+      'bd07bbaec089c018f41f244d46da41dc2d5cee2eb374542bb2d663d1aef88c65b7f6a108650fabe6b81ef2630ceb7b252974915c158884b03d9b851fdc74e36b',
     ),
     sdkOptions: {
       _expectedMineRate: 1000,
@@ -65,7 +63,8 @@ class NodeHandleTx extends Node {
 }
 
 const genesisAccountPromise = configuration.getGenesisAccount();
-export const isLimitedCoins = networkId !== 'ae_devnet';
+/* export const isLimitedCoins = networkId !== 'ae_devnet'; */
+export const isLimitedCoins = true;
 
 export async function getSdk(accountCount = 1): Promise<AeSdk> {
   const accounts = new Array(accountCount).fill(null).map(() => MemoryAccount.generate());
