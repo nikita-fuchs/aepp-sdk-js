@@ -229,6 +229,33 @@ const tx = await contract.fund_project(1, { amount: 50 }); // recommended
 // or
 const tx = await contract.$call('fund_project', [1], { amount: 50 });
 ```
+## Debug Transactions
+Whether you deploy a contract or call some contract function, you can find out details that might help you sorting out issues with the `unpackTx` command.
+
+```js
+{ unpackTx } from '@aeternity/aepp-sdk';
+
+// some succeeding or failing tx
+const tx = await contract.fund_project(1, { amount: 50 });
+
+console.log(unpackTx(tx))
+
+// yields:
+{
+  tag: 42,
+  version: 1,
+  ownerId: 'ak_....',
+  nonce: 332,
+  ctVersion: { vmVersion: 8, abiVersion: 3 },
+  fee: '180320000000000',
+  ttl: 0,
+  amount: '50',
+  gasLimit: 5819680,
+  gasPrice: '1000000000',
+  callData: 'cb_KxF...'
+}
+
+```
 
 ## Transaction options
 
